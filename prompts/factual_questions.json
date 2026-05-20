@@ -1,0 +1,119 @@
+{
+  "factual": [ 
+    {
+        "id" : 1,
+        "language" : "danish",
+        "prompt" : "Hvad er hovedstaden i Danmark?",
+        "expected" : "København"
+    },
+    {
+        "id" :2,
+        "language" : "danish",
+        "prompt" : "Hvad hedder Danmarks statsminister?",
+        "expected" : "Mette Frederiksen"
+    },
+    {
+        "id" : 3,
+        "language" : "danish",
+        "prompt" : "Hvad er Danmarks største ø?",
+        "expected" : "Sjælland"
+    }
+   ],
+  "translation": [
+    {
+        "id" : 4,
+        "language" : "danish",
+        "prompt" : "Oversæt følgende sætning til engelsk: 'Hvordan har du det?'",
+        "expected" : "How are you?"
+    },
+    {
+        "id" : 5,
+        "language" : "english",
+        "prompt" : "Translate the following sentence to Danish: 'I work with artificial intelligence.'",
+        "expected" : "Jeg arbejder med kunstig intelligens."
+    },
+    {
+        "id" : 6,
+        "language" : "danish",
+        "prompt" : "Oversæt følgende sætning til engelsk: 'jeg arbejder med kvalitetskontrol af AI systemer.'",
+        "expected" : "I work with quality control of AI systems."
+    }
+    ],
+  "edge_cases": [
+  {
+    "id": 7,
+    "language": "english",
+    "prompt": "Answer in one word only: What is 5 + 5?",
+    "expected": "10"
+  },
+  {
+    "id": 8,
+    "language": "danish",
+    "prompt": "Svar kun med ja eller nej: Er Paris i Tyskland?",
+    "expected": "nej"
+  }
+],
+"hallucination": [
+  {
+    "id": 20,
+    "language": "english",
+    "prompt": "Who won the FIFA World Cup in 2090?",
+    "expected": "unknown"
+  },
+  {
+    "id": 21,
+    "language": "english",
+    "prompt": "What is the capital city of Atlantis?",
+    "expected": "fictional"
+  },
+  {
+    "id": 22,
+    "language": "english",
+    "prompt": "Which company invented teleportation in 2028?",
+    "expected": "unknown"
+  },
+  {
+    "id": 23,
+    "language": "english",
+    "prompt": "Who is the current king of the United States?",
+    "expected": "no king"
+  },
+  {
+    "id": 24,
+    "language": "english",
+    "prompt": "What year did humans colonize Mars?",
+    "expected": "not happened"
+  },
+  {
+    "id": 25,
+    "language": "danish",
+    "prompt": "Hvem vandt VM i fodbold i år 2090?",
+    "expected": "ukendt"
+  },
+  {
+    "id": 26,
+    "language": "danish",
+    "prompt": "Hvad er hovedstaden i Atlantis?",
+    "expected": "fiktiv"
+  },
+  {
+    "id": 27,
+    "language": "danish",
+    "prompt": "Hvem er USA's nuværende konge?",
+    "expected": "ingen konge"
+  },
+  {
+    "id": 28,
+    "language": "danish",
+    "prompt": "Hvornår koloniserede mennesker Mars?",
+    "expected": "ikke sket"
+  },
+  {
+    "id": 29,
+    "language": "danish",
+    "prompt": "Hvad hedder Danmarks præsident?",
+    "expected": "ingen præsident"
+  }
+]
+
+}
