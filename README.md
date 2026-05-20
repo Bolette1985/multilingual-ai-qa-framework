@@ -1,62 +1,89 @@
-# 🌍 Multilingual AI QA Evaluation Framework
+# 🌍 Multilingual LLM & Agentic AI Evaluation Framework
 
-A lightweight Python framework for evaluating Large Language Models (LLMs) on multilingual performance, hallucination resistance, and factual accuracy using automated test prompts.
+A modular Python framework for evaluating Large Language Models (LLMs) and agentic AI systems across multilingual, reasoning, and hallucination-sensitive tasks.
 
 ---
 
-## 🚀 What this project does
+## 🚀 Overview
 
-This framework automatically:
+This framework provides a structured and reproducible pipeline for benchmarking AI model behavior across multiple dimensions, including:
 
-- Generates synthetic evaluation prompts (English + Danish)
-- Tests LLM responses using Google Gemini API
-- Scores outputs for correctness and hallucination resistance
-- Saves structured results as CSV
-- Generates performance reports with visual charts
+- Multilingual robustness (English + Danish, extensible)
+- Factual accuracy and hallucination resistance
+- Reasoning quality under structured prompts
+- Early-stage evaluation of agentic AI behaviors
+
+It is designed as a lightweight but extensible foundation for AI quality engineering and LLM evaluation workflows.
+
+---
+
+## 🎯 Why this exists
+
+As LLMs and agentic AI systems become more capable and autonomous, traditional QA approaches are no longer sufficient to evaluate:
+
+- Reasoning consistency across contexts
+- Multilingual performance degradation
+- Hallucination behavior under uncertainty
+- Structured task execution in agent-like workflows
+
+This framework explores practical methods for building repeatable evaluation pipelines for next-generation AI systems.
 
 ---
 
 ## 🧠 Key Features
 
-### 📌 Prompt Generation
-- Hallucination-based test cases
+### 📌 Prompt Generation Engine
+- Synthetic evaluation dataset generation
+- Hallucination-focused test cases
 - Hard reasoning prompts
 - Multilingual support (English + Danish)
-- Configurable dataset size
+- Configurable dataset size and structure
 
 ### 🤖 Evaluation Engine
-- Uses Google Gemini (`gemini-2.5-flash`)
-- Automatic retry handling for rate limits
+- Google Gemini API integration (`gemini-2.5-flash`)
+- Structured response evaluation pipeline
 - Category-based scoring system
-- Safe-word hallucination detection
+- Hallucination detection heuristics
+- Rate-limit safe retry handling
 
-### 📊 Reporting System
-- Accuracy per category
-- Accuracy per language
+### 📊 Reporting & Analytics
+- Accuracy scoring by category
+- Performance breakdown by language
 - Score distribution analysis
-- Auto-generated charts (matplotlib)
-- Markdown summary report
+- Automated visual reports (matplotlib)
+- Markdown-based evaluation summaries
 
 ---
 
-## 📁 Project Structure
+## 🧪 Use Cases
+
+- Benchmarking LLM performance across languages
+- Evaluating hallucination resistance in generative models
+- Testing reasoning quality in structured prompts
+- Comparing model outputs across languages and difficulty levels
+- Building datasets for AI QA automation pipelines
+- Early experimentation with agentic AI evaluation workflows
+
+---
+
+## 🏗️ Project Structure
 
 ```text
 multilingual-ai-qa-framework/
 ├── src/
-│   ├── main.py
-│   ├── evaluator.py
-│   ├── prompt_generator.py
-│   └── report_generator.py
+│   ├── main.py                 # Entry point
+│   ├── evaluator.py           # Core evaluation engine
+│   ├── prompt_generator.py     # Synthetic prompt generation
+│   └── report_generator.py     # Report + visualization builder
 │
 ├── prompts/
-│   └── generated_*.json
+│   └── generated_*.json        # Generated evaluation datasets
 │
 ├── results/
-│   └── output.csv
+│   └── output.csv             # Raw evaluation results
 │
 ├── reports/
-│   ├── report.md
+│   ├── report.md              # Summary report
 │   ├── accuracy_by_category.png
 │   ├── accuracy_by_language.png
 │   └── score_distribution.png
