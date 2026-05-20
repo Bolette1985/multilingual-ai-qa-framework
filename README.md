@@ -40,8 +40,28 @@ This framework automatically:
 ---
 
 ## 📁 Project Structure
+
+```text
 multilingual-ai-qa-framework/
 ├── src/
+│   ├── main.py
+│   ├── evaluator.py
+│   ├── prompt_generator.py
+│   └── report_generator.py
+│
 ├── prompts/
+│   └── generated_*.json
+│
 ├── results/
+│   └── output.csv
+│
 ├── reports/
+│   ├── report.md
+│   ├── accuracy_by_category.png
+│   ├── accuracy_by_language.png
+│   └── score_distribution.png
+│
+├── .gitignore
+├── README.md
+└── requirements.txt
+```
