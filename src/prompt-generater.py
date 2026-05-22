@@ -1,17 +1,28 @@
+import os
 import json
 import random
-
-# =========================
-# CONFIG
-# =========================
-
+import argparse
 from datetime import datetime
 
-timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+# =========================
+# LOAD CONFIG
+# =========================
 
+with open("config.json", "r", encoding="utf-8") as f:
+    config = json.load(f)
+
+NUM_PROMPTS = config["num_prompts"]
+SEED = config["seed"]
+
+random.seed(SEED)
+
+# =========================
+# OUTPUT FILE
+# =========================
+
+timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 OUTPUT_FILE = f"prompts/generated_{timestamp}.json"
 
-NUM_PROMPTS = 4
 
 # =========================
 # DATA POOLS
@@ -112,7 +123,18 @@ dataset = {
 
 current_id = 100
 
-for _ in range(NUM_PROMPTS // 2):
+# =========================
+# SPLIT CONFIG 
+# =========================
+languages = config.get("languages", ["english", "danish"])
+
+lang_count = {
+    "english": NUM_PROMPTS // len(languages),
+    "danish": NUM_PROMPTS - (NUM_PROMPTS // len(languages))
+}
+
+
+for _ in range(lang_count["english"]):
 
     difficulty = random.choice(["easy", "hard"])
 
@@ -131,7 +153,7 @@ for _ in range(NUM_PROMPTS // 2):
 
     current_id += 1
 
-for _ in range(NUM_PROMPTS // 2):
+for _ in range(lang_count["danish"]):
 
     difficulty = random.choice(["easy", "hard"])
 

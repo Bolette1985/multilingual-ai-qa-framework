@@ -1,92 +1,82 @@
-import os
 import json
-import glob
-import pandas as pd
+import random
+import os
 from dotenv import load_dotenv
 from google import genai
+
 from evaluator import evaluate_prompt
+from dataset_loader import load_latest_dataset
+from result_handler import save_results
+from metrics import print_summary
+
 
 # =========================
 # INIT
 # =========================
 
-load_dotenv()
+def main():
 
-api_key = os.getenv("GEMINI_API_KEY")
+    with open("config.json", "r", encoding="utf-8") as f:
+        config = json.load(f)
 
-if not api_key:
-    raise ValueError("❌ GEMINI_API_KEY not found in .env file")
+    SEED = config["seed"]
+    random.seed(SEED)
 
-client = genai.Client(api_key=api_key)
+    load_dotenv()
 
-print("🔥 AI Evaluation Runner Started")
+    api_key = os.getenv("GEMINI_API_KEY")
 
+    if not api_key:
+        raise ValueError("❌ GEMINI_API_KEY not found in .env file")
 
-# =========================
-# LOAD LATEST DATASET
-# =========================
+    client = genai.Client(api_key=api_key)
 
-prompt_files = glob.glob("prompts/generated_*.json")
-
-if not prompt_files:
-    raise FileNotFoundError("❌ No generated prompt files found")
-
-PROMPT_FILE = max(prompt_files, key=os.path.getctime)
-
-print(f"📂 Using dataset: {PROMPT_FILE}")
+    print("🔥 AI Evaluation Runner Started")
 
 
-with open(PROMPT_FILE, "r", encoding="utf-8") as f:
-    data = json.load(f)
+    # =========================
+    # LOAD DATASET
+    # =========================
 
-results = []
+    data, dataset_file = load_latest_dataset()
 
+    print(f"📂 Using dataset: {dataset_file}")
 
-# =========================
-# RUN EVALUATION
-# =========================
+    # =========================
+    # RUN EVALUATION
+    # =========================
 
-for category, prompts in data.items():
+    results = []
 
-    print(f"\n📂 Running category: {category}")
+    for category, prompts in data.items():
 
-    for item in prompts:
+        print(f"\n📂 Running category: {category}")
 
-        result = evaluate_prompt(client, item, category)
-        results.append(result)
+        for item in prompts:
 
-        print(f"✔ Prompt {item['id']} completed")
+            result = evaluate_prompt(client, item, category)
+            results.append(result)
 
-
-# =========================
-# SAVE RESULTS
-# =========================
-
-os.makedirs("results", exist_ok=True)
-
-df = pd.DataFrame(results)
-
-output_path = "results/output.csv"
-df.to_csv(output_path, index=False)
+            print(f"✔ Prompt {item['id']} completed")
 
 
-# =========================
-# SUMMARY
-# =========================
+    # =========================
+    # SAVE RESULTS
+    # =========================
 
-if len(df) == 0:
-    print("❌ No results generated - check API or dataset")
-    exit()
+    df = save_results(results)
 
-accuracy = df["passed"].mean()
-category_scores = df.groupby("category")["score"].mean()
 
-print("\n==============================")
-print("✅ EVALUATION COMPLETE")
-print("==============================")
-print(f"📊 Total Tests: {len(df)}")
-print(f"📈 Accuracy: {accuracy:.2%}")
-print(f"💾 Results saved to: {output_path}")
-print("\n📊 Category Performance")
-print((category_scores * 100).round(2).astype(str) + "%")
-print("==============================")
+    # =========================
+    # SUMMARY
+    # =========================
+
+    print_summary(df)
+
+
+    # =========================
+    # ENTRY POINT
+    # =========================
+
+    if __name__ == "__main__":
+        main()

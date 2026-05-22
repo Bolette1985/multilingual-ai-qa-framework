@@ -1,0 +1,6 @@
+{
+  "num_prompts": 4,
+  "seed": 42,
+  "languages": ["english", "danish"],
+  "dataset_type": "hallucination"
+}
