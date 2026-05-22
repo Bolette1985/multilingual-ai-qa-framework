@@ -1,94 +1,49 @@
 # 🌍 Multilingual LLM & Agentic AI Evaluation Framework
 
-A modular Python framework for evaluating Large Language Models (LLMs) and agentic AI systems across multilingual, reasoning, and hallucination-sensitive tasks.
+A modular, config-driven Python framework for evaluating Large Language Models (LLMs) across multilingual, reasoning, and hallucination-sensitive tasks.
 
 ---
 
 ## 🚀 Overview
 
-This framework provides a structured and reproducible pipeline for benchmarking AI model behavior across multiple dimensions, including:
+This project is an AI Quality Engineering framework designed to benchmark LLM behavior in structured evaluation settings.
 
-- Multilingual robustness (English + Danish, extensible)
-- Factual accuracy and hallucination resistance
-- Reasoning quality under structured prompts
-- Early-stage evaluation of agentic AI behaviors
+It supports reproducible testing of:
+- Multilingual performance (English + Danish)
+- Hallucination susceptibility
+- Reasoning under synthetic and hard prompts
+- Structured evaluation pipelines for LLM outputs
 
-It is designed as a lightweight but extensible foundation for AI quality engineering and LLM evaluation workflows.
-
----
-
-## 🎯 Why this exists
-
-As LLMs and agentic AI systems become more capable and autonomous, traditional QA approaches are no longer sufficient to evaluate:
-
-- Reasoning consistency across contexts
-- Multilingual performance degradation
-- Hallucination behavior under uncertainty
-- Structured task execution in agent-like workflows
-
-This framework explores practical methods for building repeatable evaluation pipelines for next-generation AI systems.
+The system is built with a focus on **reproducibility, modularity, and experiment control**, similar to real-world AI QA workflows.
 
 ---
 
-## 🧠 Key Features
+## 🧠 Key Design Principles
 
-### 📌 Prompt Generation Engine
-- Synthetic evaluation dataset generation
-- Hallucination-focused test cases
-- Hard reasoning prompts
-- Multilingual support (English + Danish)
-- Configurable dataset size and structure
-
-### 🤖 Evaluation Engine
-- Google Gemini API integration (`gemini-2.5-flash`)
-- Structured response evaluation pipeline
-- Category-based scoring system
-- Hallucination detection heuristics
-- Rate-limit safe retry handling
-
-### 📊 Reporting & Analytics
-- Accuracy scoring by category
-- Performance breakdown by language
-- Score distribution analysis
-- Automated visual reports (matplotlib)
-- Markdown-based evaluation summaries
+- 🔁 Reproducible experiments (fixed random seed)
+- ⚙️ Config-driven execution (JSON-based control)
+- 🧩 Modular architecture (separated pipeline components)
+- 📊 Structured evaluation outputs
+- 🧪 Synthetic dataset generation for controlled testing
 
 ---
 
-## 🧪 Use Cases
-
-- Benchmarking LLM performance across languages
-- Evaluating hallucination resistance in generative models
-- Testing reasoning quality in structured prompts
-- Comparing model outputs across languages and difficulty levels
-- Building datasets for AI QA automation pipelines
-- Early experimentation with agentic AI evaluation workflows
-
----
-
-## 🏗️ Project Structure
+## 🏗️ Architecture
 
 ```text
 multilingual-ai-qa-framework/
+│
+├── config.json                # Experiment configuration
+├── prompts/                   # Generated datasets
+├── results/                   # Evaluation outputs (CSV)
+├── reports/                   # Metrics and visual reports
+│
 ├── src/
-│   ├── main.py                 # Entry point
-│   ├── evaluator.py           # Core evaluation engine
-│   ├── prompt_generator.py     # Synthetic prompt generation
-│   └── report_generator.py     # Report + visualization builder
+│   ├── main.py                # Pipeline orchestrator
+│   ├── evaluator.py          # LLM evaluation logic
+│   ├── dataset_loader.py     # Loads latest dataset
+│   ├── result_handler.py     # Saves structured outputs
+│   ├── metrics.py            # Summary statistics
 │
-├── prompts/
-│   └── generated_*.json        # Generated evaluation datasets
-│
-├── results/
-│   └── output.csv             # Raw evaluation results
-│
-├── reports/
-│   ├── report.md              # Summary report
-│   ├── accuracy_by_category.png
-│   ├── accuracy_by_language.png
-│   └── score_distribution.png
-│
-├── .gitignore
-├── README.md
-└── requirements.txt
+└── README.md
 ```
