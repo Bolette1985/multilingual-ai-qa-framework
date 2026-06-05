@@ -1,49 +1,51 @@
 # 🌍 Multilingual LLM & Agentic AI Evaluation Framework
 
-A modular, config-driven Python framework for evaluating Large Language Models (LLMs) across multilingual, reasoning, and hallucination-sensitive tasks.
+A modular, configuration-driven Python testing framework engineered to benchmark Large Language Models (LLMs) and validate behavior across multilingual boundary constraints, deterministic reasoning paths, and hallucination vectors.
 
 ---
 
 ## 🚀 Overview
 
-This project is an AI Quality Engineering framework designed to benchmark LLM behavior in structured evaluation settings.
+This framework is built for **AI Quality Engineering (AI QE)** and **LLMOps validation**. Moving past manual prompt "vibe-checks," it implements structured pipelines to programmatically run hard prompt testing and analyze model regressions.
 
-It supports reproducible testing of:
-- Multilingual performance (English + Danish)
-- Hallucination susceptibility
-- Reasoning under synthetic and hard prompts
-- Structured evaluation pipelines for LLM outputs
-
-The system is built with a focus on **reproducibility, modularity, and experiment control**, similar to real-world AI QA workflows.
+### 🧪 Target Evaluation Capabilities
+- **Multilingual Edge-Case Optimization:** Validating linguistic nuances, idioms, and structural accuracy across complex localized datasets (**English** and **Danish**).
+- **Hallucination Mitigation:** Quantifying susceptibility to false premises and unverified assertions using deterministic string validation matching rules.
+- **Reasoning Calibration:** Measuring model adherence to explicit context bounds using hard-prompt synthetic injection.
+- **Cost-Efficient Isolation:** Fully independent simulation capabilities to bypass production cloud APIs during local pipeline testing.
 
 ---
 
-## 🧠 Key Design Principles
+## 🧠 Key Architecture & Design Principles
 
-- 🔁 Reproducible experiments (fixed random seed)
-- ⚙️ Config-driven execution (JSON-based control)
-- 🧩 Modular architecture (separated pipeline components)
-- 📊 Structured evaluation outputs
-- 🧪 Synthetic dataset generation for controlled testing
+- **🔁 Enforced Determinism:** Leverages unified configuration seeds (`random.seed`) to ensure model datasets and local simulation runs are completely reproducible across test runs.
+- **⚙️ Config-Driven Execution:** Orchestrates entire experiment parameters (dataset constraints, target language arrays, evaluation types) using a single externalized JSON control matrix (`config.json`).
+- **🧩 Separation of Concerns:** Rigidly divides data orchestration, prompt generation, model client execution, and log handling into isolated, object-oriented software modules.
+- **📊 Production-Ready Output Engineering:** Compiles execution metrics directly into structured `pandas` data pipelines to generate exportable verification logs and summary statistics.
 
 ---
 
-## 🏗️ Architecture
+## 🏗️ Project Architecture
 
 ```text
 multilingual-ai-qa-framework/
 │
-├── config.json                # Experiment configuration
-├── prompts/                   # Generated datasets
-├── results/                   # Evaluation outputs (CSV)
-├── reports/                   # Metrics and visual reports
+├── config.json                # Centralized JSON experiment configuration
+├── .env                       # Local execution environment variables (API Keys)
+├── requirements.txt           # Python ecosystem dependencies
 │
-├── src/
-│   ├── main.py                # Pipeline orchestrator
-│   ├── evaluator.py          # LLM evaluation logic
-│   ├── dataset_loader.py     # Loads latest dataset
-│   ├── result_handler.py     # Saves structured outputs
-│   ├── metrics.py            # Summary statistics
+├── prompts/                   # Hardcoded inputs & dynamically generated datasets
+│   ├── factual_questions.json
+│   └── generated_prompts.json
 │
-└── README.md
-```
+├── results/                   # Evaluation artifacts & structured metric tracking (CSV)
+│   └── output.csv             
+│
+├── src/                       # Core Framework Source
+│   ├── main.py                # Pipeline orchestrator and entry-point
+│   ├── evaluator.py           # LLM client execution interface, scoring rules & Mock logic
+│   ├── dataset_loader.py      # Upstream dataset parsing and mutation handler
+│   ├── result_handler.py      # Downstream pandas logging and file persistence
+│   ├── prompt-generater.py    # Synthetic dataset creation pipeline
+│   ├── report-generator.py    # Evaluation visualization and metric rendering
+│   └── metrics.py             # Core pipeline telemetry and summary stats
